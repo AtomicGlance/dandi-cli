@@ -9,6 +9,7 @@ from typing import Any, NoReturn
 
 import h5py
 import numpy as np
+import pytest
 from pynwb import NWBHDF5IO, NWBFile, TimeSeries
 from pytest_mock import MockerFixture
 
@@ -61,6 +62,7 @@ def test_sanitize_nwb_version() -> None:
     )
 
 
+@pytest.mark.ai_generated
 def test_rename_pose_estimation_original_videos() -> None:
     pose = SimpleNamespace(
         neurodata_type="PoseEstimation",
@@ -84,6 +86,7 @@ def test_rename_pose_estimation_original_videos() -> None:
     assert unrelated.original_videos == ["camera/raw.mp4"]
 
 
+@pytest.mark.ai_generated
 def test_rename_pose_estimation_original_videos_ignores_missing_values() -> None:
     missing = SimpleNamespace(neurodata_type="PoseEstimation")
     scalar = SimpleNamespace(
@@ -104,6 +107,7 @@ def test_rename_pose_estimation_original_videos_ignores_missing_values() -> None
     assert scalar_bytes.original_videos == b"camera/raw.mp4"
 
 
+@pytest.mark.ai_generated
 def test_rename_pose_estimation_original_videos_persists_hdf5(
     tmp_path: Path,
 ) -> None:
@@ -135,6 +139,7 @@ def test_rename_pose_estimation_original_videos_persists_hdf5(
         ]
 
 
+@pytest.mark.ai_generated
 def test_rename_nwb_external_files_updates_pose_references(
     tmp_path: Path, mocker: MockerFixture
 ) -> None:

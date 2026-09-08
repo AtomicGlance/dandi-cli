@@ -475,7 +475,11 @@ def _get_external_images(nwb: pynwb.NWBFile) -> list[dict]:
 
 
 def rename_nwb_external_files(metadata: list[dict], dandiset_path: str) -> None:
-    """Renames the external_file attribute in an ImageSeries datatype in an open nwb file.
+    """Rename external media references in an open NWB file.
+
+    This updates ``ImageSeries.external_file`` entries and legacy
+    ``PoseEstimation.original_videos`` references using the path mapping
+    collected in ``metadata["external_file_objects"]``.
 
     It pulls information about the ImageSeries objects from metadata:
     metadata["external_file_objects"] populated during _get_pynwb_metadata() call.
